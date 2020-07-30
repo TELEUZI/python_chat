@@ -19,25 +19,6 @@ import time
 
 
 class Ui_MainWindow(object):
-    def receiver(self):
-        self.massages = requests.get("HTTP://127.0.0.1:5000/send").json()["massages_for_receiving"]
-        for massage in self.massages:
-            self.massage_box.append(f'{massage["username"]}, {massage["text"]}, {massage["time"]}')
-
-    def receive_new(self):
-        self.new_massages = requests.get("HTTP://127.0.0.1:5000/send").json()["massages_for_receiving"]
-        for i in range(-len(self.new_massages)+len(self.massages), 0):
-            self.massage_box.append(f'{self.new_massages[i]["username"]}, {self.new_massages[i]["text"]}, {self.new_massages[i]["time"]}')
-            if self.text != self.new_massages[i]["text"]:
-                self.qq = QSound("youGotmail.wav")
-                self.qq.play()
-            self.massages.append([{self.new_massages[i]["username"]}, {self.new_massages[i]["text"]}, {self.new_massages[i]["time"]}])
-
-    def send_new_massage(self):
-        self.text = self.text_edit.toPlainText()
-        requests.post("http://127.0.0.1:5000/send", json={"username": "username", "text": self.text, "time": time.ctime()})
-        self.text_edit.setText("")
-
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
@@ -86,7 +67,7 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.push_button.sizePolicy().hasHeightForWidth())
         self.push_button.setSizePolicy(sizePolicy2)
         self.push_button.setFlat(False)
-        self.push_button.clicked.connect(self.send_new_massage)
+
 
 
 
