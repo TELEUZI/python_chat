@@ -5,14 +5,14 @@ import requests
 from PySide2.QtMultimedia import QSound
 
 
-class Model():
+class Model:
     def __init__(self, controller):
         self.controller = controller
+
     def receiver(self):
         self.massages = requests.get("HTTP://127.0.0.1:5000/send").json()["massages_for_receiving"]
         for massage in self.massages:
             self.controller.view.ui.massage_box.append(f'{massage["username"]}, {massage["text"]}, {massage["time"]}')
-
 
     def receive_new(self):
         self.new_massages = requests.get("HTTP://127.0.0.1:5000/send").json()["massages_for_receiving"]
@@ -25,12 +25,11 @@ class Model():
             self.massages.append(
                 [{self.new_massages[i]["username"]}, {self.new_massages[i]["text"]}, {self.new_massages[i]["time"]}])
 
-
     def send_new_massage(self):
         self.text = self.controller.view.ui.text_edit.toPlainText()
-        requests.post("http://127.0.0.1:5000/send", json={"username": "username", "text": self.text, "time": time.ctime()})
+        requests.post("http://127.0.0.1:5000/send",
+                      json={"username": "username", "text": self.text, "time": time.ctime()})
         self.controller.view.ui.text_edit.setText("")
-
 
     def timers(self):
         self.receive_new()

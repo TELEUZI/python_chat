@@ -1,18 +1,12 @@
 # This Python file uses the following encoding: utf-8
 import sys
-
 from PySide2 import QtCore
-from PySide2.QtCore import QUrl, QTimer
-from PySide2.QtWidgets import QApplication, QMainWindow, QDialogButtonBox
 from model import Model
 from view import LoginForm, MainWindow
-from ui_mainwindow import Ui_MainWindow
-from PySide2.QtWidgets import QApplication, QWidget
-from dialog import Ui_Form
-from PySide2.QtMultimedia import QMediaPlayer, QMediaContent, QSound
-import time
+from PySide2.QtWidgets import QApplication
 
-class Ctrl():
+
+class Ctrl:
     def __init__(self):
         self.view = LoginForm(self)
         self.model = Model(self)
@@ -29,15 +23,8 @@ class Ctrl():
         self.view.ui.push_button.clicked.connect(self.model.send_new_massage)
 
 
-
-
-
-
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     a = Ctrl()
 
     sys.exit(app.exec_())
-
-# a.setMedia(QMediaContent(QUrl.fromLocalFile()))
