@@ -41,4 +41,4 @@ def send():
         return {"massages_for_receiving": massages_database}
 
 
-app.run(debug = True)
+app.run(debug = False)
