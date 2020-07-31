@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash
+from flask import Flask, request, render_template
 import time
 import pickle
 
@@ -10,14 +10,14 @@ massages_database = pickle.load(f)
 
 @app.route("/")
 def homepage():
-    return render_template("index.html", name = "bustard")
+    return render_template("index.html", name="bustard")
 
 
 @app.route("/status")
 def status():
-    dick={
-        'time' : time.ctime(),
-        'status' : True
+    dick = {
+        'time': time.ctime(),
+        'status': True
     }
     return dick
 
@@ -27,18 +27,15 @@ def view():
     return {"massages_for_receiving": massages_database}
 
 
-@app.route("/send", methods=['POST', 'GET'])
+@app.route("/send", methods=['POST'])
 def send():
-    if request.method == "POST":
-        data = request.json
-        username = data["username"]
-        text = data["text"]
-        massages_database.append({"username": username, "text": text, "time": time.ctime()})
-        with open('data.pickle', 'wb') as f:
-            pickle.dump(massages_database, f)
-        return "+"
-    else:
-        return {"massages_for_receiving": massages_database}
+    data = request.json
+    username = data["username"]
+    text = data["text"]
+    massages_database.append({"username": username, "text": text, "time": time.ctime()})
+    with open('data.pickle', 'wb') as f:
+        pickle.dump(massages_database, f)
+    return "+"
 
 
-app.run(debug = False)
+app.run()

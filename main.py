@@ -16,11 +16,12 @@ class Ctrl:
 
     def show_main(self):
         self.view = MainWindow(self)
+        self.view.show()
         self.model.receiver()
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.model.timers)
+        self.timer.timeout.connect(self.model.launch_receiving_thread)
         self.timer.start(5000)
-        self.view.ui.push_button.clicked.connect(self.model.send_new_massage)
+        self.view.ui.push_button.clicked.connect(self.model.launch_sending_thread)
 
 
 if __name__ == "__main__":

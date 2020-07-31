@@ -8,14 +8,8 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
-from PySide2.QtMultimedia import QSound
+from PySide2.QtCore import (QCoreApplication, QMetaObject, Qt)
 from PySide2.QtWidgets import *
-import requests
-import time
-
-
 
 
 class Ui_MainWindow(object):
@@ -42,7 +36,6 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.massage_box)
 
-
         self.gridLayout.addLayout(self.verticalLayout_6, 0, 0, 1, 1)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(16)
@@ -56,7 +49,6 @@ class Ui_MainWindow(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.text_edit.sizePolicy().hasHeightForWidth())
         self.text_edit.setSizePolicy(sizePolicy1)
-
         self.horizontalLayout.addWidget(self.text_edit)
 
         self.push_button = QPushButton(MainWindow)
@@ -68,10 +60,6 @@ class Ui_MainWindow(object):
         self.push_button.setSizePolicy(sizePolicy2)
         self.push_button.setFlat(False)
 
-
-
-
-
         self.horizontalLayout.addWidget(self.push_button)
 
         self.horizontalLayout.setStretch(0, 10)
@@ -82,18 +70,21 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addItem(self.verticalSpacer_2, 1, 0, 1, 1)
 
-
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
+
     # setupUi
 
     def retranslateUi(self, MainWindow):
         self.massage_box.setMarkdown("")
-        self.text_edit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0436\u0435\u043b\u0430\u0435\u043c\u044b\u0439 \u0442\u0435\u043a\u0441\u0442...", None))
-        self.push_button.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c", None))
-#if QT_CONFIG(shortcut)
+        self.text_edit.setPlaceholderText(QCoreApplication.translate("MainWindow",
+                                                                     u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0436\u0435\u043b\u0430\u0435\u043c\u044b\u0439 \u0442\u0435\u043a\u0441\u0442...",
+                                                                     None))
+        self.push_button.setText(
+            QCoreApplication.translate("MainWindow", u"\u041e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c", None))
+        # if QT_CONFIG(shortcut)
         self.push_button.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+Return", None))
-#endif // QT_CONFIG(shortcut)
+        # endif // QT_CONFIG(shortcut)
         pass
     # retranslateUi
