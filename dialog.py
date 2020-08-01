@@ -7,7 +7,7 @@
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
-
+from PySide2 import QtGui
 from PySide2.QtCore import (QCoreApplication, QMetaObject, QRect, Qt)
 from PySide2.QtGui import QFont
 from PySide2.QtWidgets import *
@@ -87,7 +87,6 @@ class Ui_Form(object):
 
         QMetaObject.connectSlotsByName(Form)
     # setupUi
-
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
         self.username_label.setText(QCoreApplication.translate("Form", u"\u0418\u043c\u044f \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044f", None))
