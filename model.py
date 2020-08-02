@@ -1,10 +1,10 @@
 import sys
 import time
+
 import requests
 from PySide2.QtCore import QThread, Signal
 from PySide2.QtGui import QColor
 from PySide2.QtMultimedia import QSound
-from server.models import check_users_password
 
 
 class ReceivingNewMassagesThread(QThread):
@@ -73,20 +73,31 @@ class Model:
     def send_new_massage(self):
         self.text = self.controller.view.ui.text_edit.toPlainText()
         requests.post("http://127.0.0.1:5000/send",
-                      json={"username": "username", "text": self.text, "time": time.ctime()})
+                      json={"username": self.username, "text": self.text, "time": time.ctime()})
     def check_password(self):
-        username = self.controller.view.ui.username_line_edit.text()
+        self.username = self.controller.view.ui.username_line_edit.text()
         password = self.controller.view.ui.password_line_edit.text()
         a = requests.post("http://127.0.0.1:5000/checkpass",
-                          json={"username": username, "text": password})
+                          json={"username": self.username, "text": password})
         return a.json()['answer']
-
+    def reg_new_user(self):
+        self.username = self.controller.view.ui.username_line_edit.text()
+        password = self.controller.view.ui.password_line_edit.text()
+        a = requests.post("http://127.0.0.1:5000/reg_user",
+                          json={"username": self.username, "text": password})
+        return a.json()['answer']
     def show_main_window(self):
         if self.check_password():
             self.controller.view.hide()
             self.controller.show_main()
         else:
             self.controller.view.ui.message_box.show()
+    def sh(self):
+        self.controller.view.hide()
+        self.reg_new_user()
+        self.controller.show_main()
+
+
 
     @staticmethod
     def exit():

@@ -2,6 +2,7 @@ import pickle
 import sqlite3
 from sqlite3 import Error
 
+DATABASE_PATH = "users_database.db"
 
 def create_connection(path):
     connection = None
@@ -24,14 +25,15 @@ def execute_query(connection, query):
         print(f"The error '{e}' occurred")
 
 
-def create_new_user(connection, username, password):
+def create_new_user(username, password):
+    connection = create_connection(DATABASE_PATH)
     cursor = connection.cursor()
     cursor.execute("INSERT INTO users (name, password) VALUES (?, ?)", (username, password))
     connection.commit()
 
 
 def check_users_password(username, password):
-    connection = sqlite3.connect("users_database.db")
+    connection = create_connection(DATABASE_PATH)
     cursor = connection.cursor()
     data = cursor.execute("SELECT * FROM users WHERE (name,password) = (?, ?)", (username, password,))
     if data.fetchone():

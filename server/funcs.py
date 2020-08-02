@@ -1,5 +1,5 @@
 import time
-from models import Database
+from models import Database, create_new_user
 from models import check_users_password
 from flask import request
 
@@ -29,3 +29,10 @@ def checkpassword():
 
 def passget():
     return "Everything is OK!"
+
+
+def create_user():
+    data = request.json
+    username = data["username"]
+    passw = data["text"]
+    return {"answer": create_new_user(username, passw)}
