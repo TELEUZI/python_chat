@@ -1,3 +1,5 @@
+import sys
+
 from PySide2.QtWidgets import QWidget
 from dialog import Ui_Form
 from ui_mainwindow import Ui_MainWindow
@@ -18,6 +20,8 @@ class LoginForm(QWidget):
         self.ctrl = ctrl
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.ui.buttonBox.accepted.connect(self.ctrl.ssh)
+        self.ui.buttonBox.rejected.connect(sys.exit)
         self.setWindowTitle("Блэт, наконец-то!#2")
 
 
@@ -27,4 +31,6 @@ class EnterReg(QWidget):
         self.ctrl = ctrl
         self.ui = UiForm()
         self.ui.setupUi(self)
+        self.ui.pushButtonEnter.clicked.connect(self.ctrl.n)
+        self.ui.pushButtonReg.clicked.connect(self.ctrl.z)
         self.setWindowTitle("Блэт, наконец-то!#3")

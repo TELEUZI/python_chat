@@ -92,13 +92,3 @@ class Model:
             self.controller.show_main()
         else:
             self.controller.view.ui.message_box.show()
-    def sh(self):
-        self.controller.view.hide()
-        self.reg_new_user()
-        self.controller.show_main()
-
-
-
-    @staticmethod
-    def exit():
-        sys.exit()
