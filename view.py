@@ -28,10 +28,10 @@ class MainWindow(QWidget):
         self.ui.text_edit.setText("")
         self.ui.text_edit.setTextColor(QColor('#000000'))
         self.ui.push_button.setEnabled(True)
+
     def show_messages(self, text):
         for massage in text:
             self.ui.massage_box.append(f'{massage["username"]}, {massage["text"]}, {massage["time"]}')
-
 
 
 class LoginForm(QWidget):
@@ -41,11 +41,12 @@ class LoginForm(QWidget):
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.setWindowTitle("Блэт, наконец-то!#2")
+
     def get_username_password(self):
         return self.ui.username_line_edit.text(), self.ui.password_line_edit.text()
+
     def show_message_box(self):
         self.ui.message_box.show()
-
 
 
 class EnterReg(QWidget):
@@ -56,6 +57,7 @@ class EnterReg(QWidget):
         self.ui.setupUi(self)
 
         self.setWindowTitle("Блэт, наконец-то!#3")
+
     def enterchoise(self):
         return True
 
@@ -66,6 +68,6 @@ class Reg(QWidget):
         self.ctrl = ctrl
         self.ui = Ui_RegForm()
         self.ui.setupUi(self)
+
     def get_username_password(self):
         return self.ui.username_line_edit.text(), self.ui.password_line_edit.text()
-
