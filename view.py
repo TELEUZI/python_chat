@@ -55,11 +55,7 @@ class EnterReg(QWidget):
         self.ctrl = ctrl
         self.ui = UiForm()
         self.ui.setupUi(self)
-
         self.setWindowTitle("Блэт, наконец-то!#3")
-
-    def enterchoise(self):
-        return True
 
 
 class Reg(QWidget):
