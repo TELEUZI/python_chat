@@ -45,47 +45,51 @@ class Ctrl1:
         self.view = view()
         self.view.show()
 
-    def launch_receiving_thread(self):
-        self.receiving_messages = ReceivingNewMassagesThread(self.model, self.view)
-        self.receiving_messages.start()
-
-    def launch_sending_thread(self):
-        self.sending_massages = SendingMassageThread(self.model, self.view.get_text())
-        self.sending_massages.start_sending.connect(self.view.start_sending_message)
-        self.sending_massages.end_sending.connect(self.view.end_sending_massage)
-        self.sending_massages.start()
-
     def create_main(self):
+        def launch_receiving_thread():
+            nonlocal self
+            self.receiving_messages = ReceivingNewMassagesThread(self.model, self.view)
+            self.receiving_messages.start()
+
+        def launch_sending_thread():
+            nonlocal self
+            self.sending_massages = SendingMassageThread(self.model, self.view.get_text())
+            self.sending_massages.start_sending.connect(self.view.start_sending_message)
+            self.sending_massages.end_sending.connect(self.view.end_sending_massage)
+            self.sending_massages.start()
+
         self.change_window(MainWindow)
-        self.view.ui.push_button.clicked.connect(self.launch_sending_thread)
+        self.view.ui.push_button.clicked.connect(launch_sending_thread)
         self.view.show_messages(self.model.receiver())
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(self.launch_receiving_thread)
+        self.timer.timeout.connect(launch_receiving_thread)
         self.timer.start(5000)
 
     def create_login_form(self):
+        def try_to_login():
+            nonlocal self
+            if self.model.check_password(self.view.get_username_password()):
+                self.create_main()
+            else:
+                self.view.show_message_box()
+
         self.change_window(LoginForm)
-        self.view.ui.buttonBox.accepted.connect(self.try_to_login)
+        self.view.ui.buttonBox.accepted.connect(try_to_login)
         self.view.ui.buttonBox.rejected.connect(sys.exit)
 
     def create_reg_form(self):
+        def try_to_reg():
+            nonlocal self
+            z = self.model.reg_new_user(self.view.get_username_password())
+            if z[0]:
+                self.create_main()
+                self.view.good_reg("Благодарим за регистрацию!")
+            else:
+                self.view.show_message_box(z[1])
+
         self.change_window(Reg)
-        self.view.ui.buttonBox.accepted.connect(self.try_to_reg)
+        self.view.ui.buttonBox.accepted.connect(try_to_reg)
         self.view.ui.buttonBox.rejected.connect(sys.exit)
-
-    def try_to_reg(self):
-        z = self.model.reg_new_user(self.view.get_username_password())
-        if z[0]:
-            self.create_main()
-            self.view.good_reg("Благодарим за регистрацию!")
-        else:
-            self.view.show_message_box(z[1])
-
-    def try_to_login(self):
-        if self.model.check_password(self.view.get_username_password()):
-            self.create_main()
-        else:
-            self.view.show_message_box()
 
     @staticmethod
     def exit():
