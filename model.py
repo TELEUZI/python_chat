@@ -11,7 +11,7 @@ class Model:
     def __init__(self):
         self.massages = requests.get("http://127.0.0.1:5000/view").json()["database"]
 
-    def receiver(self):
+    def get_messages(self):
         return self.massages
 
     def receive_new(self):

@@ -34,10 +34,10 @@ class SendingMassageThread(QThread):
         self.end_sending.emit()
 
 
-class Ctrl1:
+class Controller:
     def __init__(self, view, model):
-        self.view = view()
         self.model = model()
+        self.view = view()
         self.view.show()
 
     def change_window(self, view):
@@ -60,7 +60,7 @@ class Ctrl1:
 
         self.change_window(MainWindow)
         self.view.ui.push_button.clicked.connect(launch_sending_thread)
-        self.view.show_messages(self.model.receiver())
+        self.view.show_messages(self.model.get_messages())
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(launch_receiving_thread)
         self.timer.start(5000)
@@ -91,15 +91,14 @@ class Ctrl1:
         self.view.ui.buttonBox.accepted.connect(try_to_reg)
         self.view.ui.buttonBox.rejected.connect(sys.exit)
 
-    @staticmethod
-    def exit():
-        sys.exit()
+    def create_reg_enter(self):
+        self.view.ui.pushButtonEnter.clicked.connect(self.create_login_form)
+        self.view.ui.pushButtonReg.clicked.connect(self.create_reg_form)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    r = Ctrl1(EnterReg, Model)
-    r.view.ui.pushButtonEnter.clicked.connect(r.create_login_form)
-    r.view.ui.pushButtonReg.clicked.connect(r.create_reg_form)
+    controller = Controller(EnterReg, Model)
+    controller.create_reg_enter()
 
     sys.exit(app.exec_())
