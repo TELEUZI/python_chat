@@ -10,9 +10,8 @@ from reg import Ui_RegForm
 
 
 class MainWindow(QWidget):
-    def __init__(self, ctrl):
+    def __init__(self):
         super(MainWindow, self).__init__()
-        self.ctrl = ctrl
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
@@ -32,12 +31,14 @@ class MainWindow(QWidget):
     def show_messages(self, text):
         for massage in text:
             self.ui.massage_box.append(f'{massage["username"]}, {massage["text"]}, {massage["time"]}')
+    def show_new(self, text):
+        for massage in text:
+            self.ui.massage_box.append(massage)
 
 
 class LoginForm(QWidget):
-    def __init__(self, ctrl):
+    def __init__(self):
         super(LoginForm, self).__init__()
-        self.ctrl = ctrl
         self.ui = Ui_Form()
         self.ui.setupUi(self)
         self.setWindowTitle("Блэт, наконец-то!#2")
@@ -50,18 +51,16 @@ class LoginForm(QWidget):
 
 
 class EnterReg(QWidget):
-    def __init__(self, ctrl):
+    def __init__(self):
         super(EnterReg, self).__init__()
-        self.ctrl = ctrl
         self.ui = UiForm()
         self.ui.setupUi(self)
         self.setWindowTitle("Блэт, наконец-то!#3")
 
 
 class Reg(QWidget):
-    def __init__(self, ctrl):
+    def __init__(self):
         super(Reg, self).__init__()
-        self.ctrl = ctrl
         self.ui = Ui_RegForm()
         self.ui.setupUi(self)
 

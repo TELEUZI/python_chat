@@ -1,6 +1,6 @@
 import time
 from models import Database, create_new_user
-from models import check_users_password
+from models import check_users_password, create_new_user
 from flask import request
 
 
@@ -10,14 +10,14 @@ def post_data():
     text = data["text"]
     massages_database = Database()
     nm = massages_database.load_data()
-    nm["database"].append({"username": username, "text": text, "time": time.ctime()})
+    nm.append({"username": username, "text": text, "time": time.ctime()})
     massages_database.save_data(nm)
-    return nm
+    return {"database": nm}
 
 
 def get_data():
     massages_database = Database().load_data()
-    return massages_database
+    return {"database": massages_database}
 
 
 def checkpassword():

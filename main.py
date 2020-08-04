@@ -10,12 +10,13 @@ from PySide2.QtWidgets import QApplication
 
 
 class ReceivingNewMassagesThread(QThread):
-    def __init__(self, model):
+    def __init__(self, model, view):
         super().__init__()
         self.model = model
+        self.view = view
 
     def run(self):
-        self.model.receive_new()
+        self.view.show_new(self.model.receive_new())
 
 
 class SendingMassageThread(QThread):
@@ -35,17 +36,17 @@ class SendingMassageThread(QThread):
 
 class Ctrl1:
     def __init__(self, view, model):
-        self.view = view(self)
-        self.model = model(self)
+        self.view = view()
+        self.model = model()
         self.view.show()
 
     def change_window(self, view):
         self.view.hide()
-        self.view = view(self)
+        self.view = view()
         self.view.show()
 
     def launch_receiving_thread(self):
-        self.receiving_messages = ReceivingNewMassagesThread(self.model)
+        self.receiving_messages = ReceivingNewMassagesThread(self.model, self.view)
         self.receiving_messages.start()
 
     def launch_sending_thread(self):
@@ -53,12 +54,6 @@ class Ctrl1:
         self.sending_massages.start_sending.connect(self.view.start_sending_message)
         self.sending_massages.end_sending.connect(self.view.end_sending_massage)
         self.sending_massages.start()
-
-    def try_to_login(self):
-        if self.model.check_password(self.view.get_username_password()):
-            self.create_main()
-        else:
-            self.view.show_message_box()
 
     def create_main(self):
         self.change_window(MainWindow)
@@ -81,6 +76,12 @@ class Ctrl1:
     def try_to_reg(self):
         if self.model.reg_new_user(self.view.get_username_password()):
             self.create_main()
+
+    def try_to_login(self):
+        if self.model.check_password(self.view.get_username_password()):
+            self.create_main()
+        else:
+            self.view.show_message_box()
 
     @staticmethod
     def exit():

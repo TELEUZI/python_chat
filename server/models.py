@@ -30,6 +30,7 @@ def create_new_user(username, password):
     cursor = connection.cursor()
     cursor.execute("INSERT INTO users (name, password) VALUES (?, ?)", (username, password))
     connection.commit()
+    return True
 
 
 def check_users_password(username, password):
