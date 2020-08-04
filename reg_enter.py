@@ -8,11 +8,8 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
-    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
-    QPixmap, QRadialGradient)
+from PySide2.QtCore import (QCoreApplication, QMetaObject, Qt)
+from PySide2.QtGui import (QFont)
 from PySide2.QtWidgets import *
 
 
@@ -64,20 +61,24 @@ class UiForm(object):
 
         self.horizontalLayout.addWidget(self.pushButtonReg)
 
-
         self.verticalLayout_2.addLayout(self.horizontalLayout)
-
 
         self.retranslateUi(Form)
 
         QMetaObject.connectSlotsByName(Form)
+
     # setupUi
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label.setText(QCoreApplication.translate("Form", u"\u0414\u043e\u0431\u0440\u043e \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c. \u0421\u043d\u043e\u0432\u0430.", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0436\u0435\u043b\u0430\u0435\u043c\u043e\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435.", None))
+        self.label.setText(QCoreApplication.translate("Form",
+                                                      u"\u0414\u043e\u0431\u0440\u043e \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c. \u0421\u043d\u043e\u0432\u0430.",
+                                                      None))
+        self.label_2.setText(QCoreApplication.translate("Form",
+                                                        u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0436\u0435\u043b\u0430\u0435\u043c\u043e\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435.",
+                                                        None))
         self.pushButtonEnter.setText(QCoreApplication.translate("Form", u"\u0412\u043e\u0439\u0442\u0438", None))
-        self.pushButtonReg.setText(QCoreApplication.translate("Form", u"\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c\u0441\u044f", None))
+        self.pushButtonReg.setText(QCoreApplication.translate("Form",
+                                                              u"\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c\u0441\u044f",
+                                                              None))
     # retranslateUi
-

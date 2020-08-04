@@ -49,7 +49,6 @@ class LoginForm(QWidget):
         self.ui.message_box.show()
 
 
-
 class EnterReg(QWidget):
     def __init__(self):
         super(EnterReg, self).__init__()
@@ -71,9 +70,8 @@ class Reg(QWidget):
         self.ui.message_box.setText(text)
         self.ui.message_box.setWindowTitle("Ошибка!")
         self.ui.message_box.show()
+
     def good_reg(self, text):
         self.ui.message_box.setText(text)
         self.ui.message_box.setWindowTitle("Добро пожаловать в чат!")
         self.ui.message_box.show()
-
-

@@ -28,7 +28,7 @@ class Model:
 
     def send_new_massage(self, text):
         requests.post("http://127.0.0.1:5000/send",
-                      json={"username": self.username, "text": text, "time": datetime.now().strftime("%d_%B_%Y_%H.%M")})
+                      json={"username": self.username, "text": text, "time": datetime.now().strftime("%d %B %Y, %H:%M")})
 
     def check_password(self, username_password):
         self.username = username_password[0]
