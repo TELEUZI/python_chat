@@ -110,7 +110,9 @@ class Ui_RegForm(object):
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
 
         self.verticalLayout_2.addWidget(self.buttonBox)
-
+        self.message_box = QMessageBox()
+        self.message_box.setWindowTitle("Ошибка!")
+        self.message_box.setText('Неправильный логин или пароль!')
 
         self.retranslateUi(RegForm)
 

@@ -1,12 +1,10 @@
-import sys
-
 from PySide2.QtGui import QColor
-
 from PySide2.QtWidgets import QWidget
+
 from dialog import Ui_Form
-from ui_mainwindow import Ui_MainWindow
-from reg_enter import UiForm
 from reg import Ui_RegForm
+from reg_enter import UiForm
+from ui_mainwindow import Ui_MainWindow
 
 
 class MainWindow(QWidget):
@@ -31,6 +29,7 @@ class MainWindow(QWidget):
     def show_messages(self, text):
         for massage in text:
             self.ui.massage_box.append(f'{massage["username"]}, {massage["text"]}, {massage["time"]}')
+
     def show_new(self, text):
         for massage in text:
             self.ui.massage_box.append(massage)
@@ -50,6 +49,7 @@ class LoginForm(QWidget):
         self.ui.message_box.show()
 
 
+
 class EnterReg(QWidget):
     def __init__(self):
         super(EnterReg, self).__init__()
@@ -65,4 +65,10 @@ class Reg(QWidget):
         self.ui.setupUi(self)
 
     def get_username_password(self):
-        return self.ui.username_line_edit.text(), self.ui.password_line_edit.text()
+        return self.ui.username_line_edit.text(), self.ui.password_line_edit.text(), self.ui.password_line_edit_2.text()
+
+    def show_message_box(self, text):
+        self.ui.message_box.setText(text)
+        self.ui.message_box.show()
+
+

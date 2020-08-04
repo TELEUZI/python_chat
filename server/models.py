@@ -28,6 +28,7 @@ def execute_query(connection, query):
 def create_new_user(username, password):
     connection = create_connection(DATABASE_PATH)
     cursor = connection.cursor()
+    
     cursor.execute("INSERT INTO users (name, password) VALUES (?, ?)", (username, password))
     connection.commit()
     return True

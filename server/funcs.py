@@ -8,9 +8,10 @@ def post_data():
     data = request.json
     username = data["username"]
     text = data["text"]
+    time = data["time"]
     massages_database = Database()
     nm = massages_database.load_data()
-    nm.append({"username": username, "text": text, "time": time.ctime()})
+    nm.append({"username": username, "text": text, "time": time})
     massages_database.save_data(nm)
     return {"database": nm}
 

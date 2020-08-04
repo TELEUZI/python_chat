@@ -74,8 +74,11 @@ class Ctrl1:
         self.view.ui.buttonBox.rejected.connect(sys.exit)
 
     def try_to_reg(self):
-        if self.model.reg_new_user(self.view.get_username_password()):
+        z = self.model.reg_new_user(self.view.get_username_password())
+        if z[0]:
             self.create_main()
+        else:
+            self.view.show_message_box(z[1])
 
     def try_to_login(self):
         if self.model.check_password(self.view.get_username_password()):
