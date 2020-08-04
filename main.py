@@ -1,12 +1,12 @@
 # This Python file uses the following encoding: utf-8
 import sys
+
 from PySide2 import QtCore
 from PySide2.QtCore import QThread, Signal
-from PySide2.QtGui import QColor
+from PySide2.QtWidgets import QApplication
 
 from model import Model
 from view import LoginForm, MainWindow, EnterReg, Reg
-from PySide2.QtWidgets import QApplication
 
 
 class ReceivingNewMassagesThread(QThread):
@@ -77,6 +77,7 @@ class Ctrl1:
         z = self.model.reg_new_user(self.view.get_username_password())
         if z[0]:
             self.create_main()
+            self.view.good_reg("Благодарим за регистрацию!")
         else:
             self.view.show_message_box(z[1])
 

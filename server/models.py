@@ -28,10 +28,12 @@ def execute_query(connection, query):
 def create_new_user(username, password):
     connection = create_connection(DATABASE_PATH)
     cursor = connection.cursor()
-    
+    data = cursor.execute("SELECT * FROM users WHERE (name) = (?)", (username,))
+    if data.fetchone():
+        return False, "Пользователь с таким именем уже зарегистрирован!"
     cursor.execute("INSERT INTO users (name, password) VALUES (?, ?)", (username, password))
     connection.commit()
-    return True
+    return True,
 
 
 def check_users_password(username, password):

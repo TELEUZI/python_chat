@@ -1,12 +1,9 @@
 import locale
-import sys
-import time
+from datetime import datetime
 
 import requests
-from PySide2.QtCore import QThread, Signal
-from PySide2.QtGui import QColor
 from PySide2.QtMultimedia import QSound
-from datetime import datetime
+
 locale.setlocale(locale.LC_TIME, "ru")
 
 
@@ -44,6 +41,7 @@ class Model:
             self.username = username_password[0]
             a = requests.post("http://127.0.0.1:5000/reg_user",
                               json={"username": self.username, "text": username_password[1]})
-            return a.json()['answer'],
+            answer = a.json()['answer']
+            return answer[0], answer[1]
         else:
             return False, 'Пароли не совпадают!'

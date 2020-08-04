@@ -69,6 +69,11 @@ class Reg(QWidget):
 
     def show_message_box(self, text):
         self.ui.message_box.setText(text)
+        self.ui.message_box.setWindowTitle("Ошибка!")
+        self.ui.message_box.show()
+    def good_reg(self, text):
+        self.ui.message_box.setText(text)
+        self.ui.message_box.setWindowTitle("Добро пожаловать в чат!")
         self.ui.message_box.show()
 
 
