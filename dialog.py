@@ -73,8 +73,6 @@ class Ui_Form(object):
         self.password_line_edit.setSizePolicy(sizePolicy1)
         self.password_line_edit.setEchoMode(QLineEdit.Password)
         self.message_box = QMessageBox()
-        self.message_box.setWindowTitle("Ошибка!")
-        self.message_box.setText('Неправильный логин или пароль!')
         self.message_box.hide()
         self.horizontalLayout.addWidget(self.password_line_edit)
 

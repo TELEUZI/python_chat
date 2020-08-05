@@ -45,7 +45,9 @@ class LoginForm(QWidget):
     def get_username_password(self):
         return self.ui.username_line_edit.text(), self.ui.password_line_edit.text()
 
-    def show_message_box(self):
+    def show_unsuccessful_sign_in_message(self):
+        self.message_box.setWindowTitle("Ошибка!")
+        self.message_box.setText('Неправильный логин или пароль!')
         self.ui.message_box.show()
 
 
@@ -66,12 +68,12 @@ class Reg(QWidget):
     def get_username_password(self):
         return self.ui.username_line_edit.text(), self.ui.password_line_edit.text(), self.ui.password_line_edit_2.text()
 
-    def show_message_box(self, text):
+    def show_unsuccessful_sign_up_message(self, text):
         self.ui.message_box.setText(text)
         self.ui.message_box.setWindowTitle("Ошибка!")
         self.ui.message_box.show()
 
-    def good_reg(self, text):
+    def successful_sign_up_message(self, text):
         self.ui.message_box.setText(text)
         self.ui.message_box.setWindowTitle("Добро пожаловать в чат!")
         self.ui.message_box.show()

@@ -71,7 +71,7 @@ class Controller:
             if self.model.check_password(self.view.get_username_password()):
                 self.create_main()
             else:
-                self.view.show_message_box()
+                self.view.show_unsuccessful_sign_up_message()
 
         self.change_window(LoginForm)
         self.view.ui.buttonBox.accepted.connect(try_to_login)
@@ -83,9 +83,9 @@ class Controller:
             z = self.model.reg_new_user(self.view.get_username_password())
             if z[0]:
                 self.create_main()
-                self.view.good_reg("Благодарим за регистрацию!")
+                self.view.successful_sign_up_message("Благодарим за регистрацию!")
             else:
-                self.view.show_message_box(z[1])
+                self.view.show_unsuccessful_sign_up_message(z[1])
 
         self.change_window(Reg)
         self.view.ui.buttonBox.accepted.connect(try_to_reg)
