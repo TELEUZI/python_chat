@@ -9,9 +9,10 @@ def post_data():
     username = data["username"]
     text = data["text"]
     time = data["time"]
-    massages_database = Database().load_data()
-    massages_database.append({"username": username, "text": text, "time": time})
-    massages_database.save_data()
+    massages_database = Database()
+    nm = massages_database.load_data()
+    nm.append({"username": username, "text": text, "time": time})
+    massages_database.save_data(nm)
     return {"database": nm}
 
 

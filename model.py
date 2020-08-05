@@ -9,21 +9,21 @@ locale.setlocale(locale.LC_TIME, "ru")
 
 class Model:
     def __init__(self):
-        self.massages = requests.get("http://127.0.0.1:5000/view").json()["database"]
+        self.messages = requests.get("http://127.0.0.1:5000/view").json()["database"]
 
     def get_messages(self):
-        return self.massages
+        return [f'{a["username"]}, {a["time"]}:\n{a["text"]}' for a in self.messages[-20:]]
 
     def receive_new(self):
         new = []
-        self.new_massages = requests.get("http://127.0.0.1:5000/view").json()["database"]
-        for i in range(-len(self.new_massages) + len(self.massages), 0):
+        self.new_messages = requests.get("http://127.0.0.1:5000/view").json()["database"]
+        for i in range(-len(self.new_messages) + len(self.messages), 0):
             new.append(
-                f'{self.new_massages[i]["username"]}, {self.new_massages[i]["time"]}:\n{self.new_massages[i]["text"]}')
-            if self.username != self.new_massages[i]["username"]:
+                f'{self.new_messages[i]["username"]}, {self.new_messages[i]["time"]}:\n{self.new_messages[i]["text"]}')
+            if self.username != self.new_messages[i]["username"]:
                 self.qq = QSound("youGotmail.wav")
                 self.qq.play()
-            self.massages.extend(new)
+            self.messages.extend(new)
         return new
 
     def send_new_massage(self, text):

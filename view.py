@@ -27,8 +27,8 @@ class MainWindow(QWidget):
         self.ui.push_button.setEnabled(True)
 
     def show_messages(self, text):
-        for massage in text:
-            self.ui.massage_box.append(f'{massage["username"]}, {massage["text"]}, {massage["time"]}')
+        for message in text:
+            self.ui.massage_box.append(message)
 
     def show_new(self, text):
         for massage in text:

@@ -68,8 +68,10 @@ con = create_connection("users_database.db")
 class Database:
     def load_data(self):
         f = open('data.pickle', 'rb')
-        return pickle.load(f)
+        massages_database = pickle.load(f)
+        return massages_database
 
-    def save_data(self):
+    def save_data(self, new_dat):
+        massages_database = new_dat
         with open('data.pickle', 'wb') as f:
-            pickle.dump(self, f)
+            pickle.dump(massages_database, f)
