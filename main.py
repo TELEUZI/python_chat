@@ -49,7 +49,7 @@ class Controller:
         def launch_receiving_thread():
             nonlocal self
             self.receiving_messages = ReceivingNewMassagesThread(self.model, self.view)
-            self.receiving_messages.start()
+            self.receiving_messages.run()
 
         def launch_sending_thread():
             nonlocal self

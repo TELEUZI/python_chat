@@ -20,10 +20,11 @@ class Model:
         for i in range(-len(self.new_messages) + len(self.messages), 0):
             new.append(
                 f'{self.new_messages[i]["username"]}, {self.new_messages[i]["time"]}:\n{self.new_messages[i]["text"]}')
-            if self.username != self.new_messages[i]["username"]:
+            self.messages.extend(new)
+            if self.username != self.new_messages[-1]["username"]:
                 self.qq = QSound("youGotmail.wav")
                 self.qq.play()
-            self.messages.extend(new)
+
         return new
 
     def send_new_massage(self, text):
